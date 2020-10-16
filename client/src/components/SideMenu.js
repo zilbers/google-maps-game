@@ -28,17 +28,18 @@ function SideMenu() {
           onMouseDown={handleMouseDown}
           className={visibility}
         >
+          <h1>Swords and Knives</h1>
           <h2>
             <a href='#'>Home</a>
           </h2>
           <h2>
-            <a href='#'>About</a>
+            <a href='#'>Rules</a>
           </h2>
           <h2>
-            <a href='#'>Contact</a>
+            <a href='#'>Scoreboard</a>
           </h2>
           <h2>
-            <a href='#'>Search</a>
+            <a href='#'>Factions</a>
           </h2>
         </div>
       ) : (

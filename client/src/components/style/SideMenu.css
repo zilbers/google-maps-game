@@ -12,10 +12,6 @@ body {
   z-index: 10;
 }
 
-#side-menu li {
-  margin-bottom: 10px;
-}
-
 #roundButton {
   background-color: #000000;
   margin-top: 3vh;
@@ -42,7 +38,7 @@ body {
 }
 
 #flyoutMenu {
-  width: 20vw;
+  width: 330px;
   height: 100vh;
   background-color: #272726;
   position: fixed;
@@ -66,6 +62,11 @@ body {
   color: #51a351;
   margin-left: 15px;
   text-decoration: none;
+}
+
+#flyoutMenu h1 {
+  color: #51a351;
+  margin-left: 15px;
 }
 
 #flyoutMenu h2 a:hover {
