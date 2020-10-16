@@ -7,6 +7,67 @@ body {
   overflow: auto;
 }
 
+#side-menu {
+  position: fixed;
+  z-index: 10;
+}
+
 #side-menu li {
   margin-bottom: 10px;
+}
+
+#roundButton {
+  background-color: #000000;
+  margin-top: 3vh;
+  margin-left: 3vw;
+  margin-bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 10px solid #51a351;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0, 1.26, 0.8, 1.28);
+}
+
+#roundButton:hover {
+  background-color: #51a351;
+  cursor: pointer;
+  border-color: #000000;
+  transform: scale(1.2, 1.2);
+}
+
+#roundButton:active {
+  border-color: #51a351;
+  background-color: #fff;
+}
+
+#flyoutMenu {
+  width: 20vw;
+  height: 100vh;
+  background-color: #272726;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+  overflow: scroll;
+  z-index: 1000;
+}
+
+#flyoutMenu.hide {
+  transform: translate3d(-100vw, 0, 0);
+}
+
+#flyoutMenu.show {
+  transform: translate3d(0vw, 0, 0);
+  overflow: hidden;
+}
+
+#flyoutMenu h2 a {
+  color: #51a351;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+#flyoutMenu h2 a:hover {
+  text-decoration: underline;
 }

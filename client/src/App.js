@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WrappedMap from './components/Map';
 import SideMenu from './components/SideMenu';
 import './App.css';
