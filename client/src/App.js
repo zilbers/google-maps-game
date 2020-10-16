@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import WrappedMap from './components/Map';
 import SideMenu from './components/SideMenu';
+import Login from './components/Login';
 import './App.css';
 
 function App() {
+  const [userFaction, setUserFaction] = useState(null);
+
   return (
     <div className='App'>
+      {!userFaction && <Login onClick={setUserFaction} />}
       <SideMenu />
       <div className='Map'>
         <WrappedMap
