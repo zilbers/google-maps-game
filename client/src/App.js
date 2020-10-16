@@ -1,11 +1,12 @@
 import React from 'react';
 import WrappedMap from './components/Map';
+import SideMenu from './components/SideMenu';
 import './App.css';
 
 function App() {
   return (
     <div className='App'>
-      <div className='Menu'></div>
+      <SideMenu />
       <div className='Map'>
         <WrappedMap
           loadingElement={<div style={{ height: `100%` }} />}

@@ -31,6 +31,8 @@ function Map() {
       defaultOptions={{ styles: mapStyles }}
     >
       {cities.map((city) => {
+        const faction = Math.random() > 0.5;
+        city.faction = faction;
         return (
           <Marker
             key={city.Id}
@@ -39,8 +41,12 @@ function Map() {
               setSelectedCity(city);
             }}
             icon={{
-              url: '/assassins-creed-logo.svg',
-              scaledSize: new window.google.maps.Size(40, 40),
+              url: faction
+                ? '/assassins-creed-logo.svg'
+                : '/knights_templar_cross.svg',
+              scaledSize: faction
+                ? new window.google.maps.Size(40, 40)
+                : new window.google.maps.Size(30, 30),
             }}
           />
         );
