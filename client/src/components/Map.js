@@ -39,7 +39,7 @@ function Map() {
               setSelectedCity(city);
             }}
             icon={{
-              url: '/Knights_Templar.svg',
+              url: '/assassins-creed-logo.svg',
               scaledSize: new window.google.maps.Size(40, 40),
             }}
           />
