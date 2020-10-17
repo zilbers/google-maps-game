@@ -10,7 +10,7 @@ function App() {
   const [
     disableOrActiveInteractions,
     setDisableOrActiveInteractions,
-  ] = useState('Map disabled');
+  ] = useState('disabled');
 
   useEffect(() => {
     setDisableOrActiveInteractions(context.faction ? '' : 'disabled');
@@ -19,7 +19,7 @@ function App() {
   return (
     <div className='App'>
       {!context.faction && <Login onClick={context.chooseFaction} />}
-      <SideMenu />
+      {context.faction && <SideMenu />}
       <div className={`Map ${disableOrActiveInteractions}`}>
         <WrappedMap
           loadingElement={<div style={{ height: `100%` }} />}
