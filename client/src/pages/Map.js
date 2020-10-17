@@ -10,8 +10,8 @@ import {
 } from 'react-google-maps';
 import { UserContext } from '../context/UserContext';
 import { GameContext } from '../context/GameContext';
-
 import mapStyles from '../components/style/mapStyles';
+import '../components/style/Map.css';
 
 const options = {
   mapTypeControl: false,
@@ -28,6 +28,7 @@ function Map() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [userChosenLocation, setUserChosenLocation] = useState(null);
+  const [action, setAction] = useState(null);
 
   function getCurrentLocation(position) {
     setCurrentLocation({
@@ -66,6 +67,10 @@ function Map() {
     });
     gameContext.setDistance(distance);
     console.log(gameContext.distance);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -169,7 +174,35 @@ function Map() {
             url: '/icons/fighting.png',
             scaledSize: new window.google.maps.Size(40, 40),
           }}
+          onClick={() => {
+            setAction(userChosenLocation);
+          }}
         />
+      )}
+      {action && (
+        <InfoWindow position={action} onCloseClick={() => setAction(null)}>
+          <form className='action-form' onSubmit={handleSubmit}>
+            <h3>Choose action!</h3>
+            <h4>Your distance is {gameContext.distance} meters</h4>
+
+            <span>
+              <input type='radio' id='move' name='action'></input>
+              <label htmlFor='move'>Move here</label>
+            </span>
+
+            <span>
+              <input type='radio' id='attack' name='action'></input>
+              <label htmlFor='attack'>Attack</label>
+            </span>
+
+            <span>
+              <input type='radio' id='defend' name='action'></input>
+              <label htmlFor='defend'>Defend</label>
+            </span>
+
+            <input type='submit' value='Submit' />
+          </form>
+        </InfoWindow>
       )}
     </GoogleMap>
   ) : (
