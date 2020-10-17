@@ -9,6 +9,8 @@ import {
   Circle,
 } from 'react-google-maps';
 import { UserContext } from '../context/UserContext';
+import { GameContext } from '../context/GameContext';
+
 import mapStyles from '../components/style/mapStyles';
 
 const options = {
@@ -19,7 +21,8 @@ const options = {
 };
 
 function Map() {
-  const context = useContext(UserContext);
+  const userContext = useContext(UserContext);
+  const gameContext = useContext(GameContext);
 
   const [cities, setCities] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
@@ -61,10 +64,12 @@ function Map() {
       lat: () => currentLocation.lat,
       lng: () => currentLocation.lng,
     });
-    alert(distance);
+    gameContext.setDistance(distance);
+    console.log(gameContext.distance);
   };
 
   useEffect(() => {
+    console.log(gameContext, userContext);
     (async () => {
       try {
         const { data: currentCities } = await axios.get('/api/v1/cities');
@@ -143,24 +148,29 @@ function Map() {
       )}
 
       {/* Users Marker */}
-      {context.faction && (
+      {userContext.faction && (
         <Marker
           position={currentLocation}
           icon={{
             url:
-              context.faction === 'assassins'
+              userContext.faction === 'assassins'
                 ? '/icons/assassin.png'
                 : '/icons/knight.png',
-            scaledSize:
-              context.faction === 'assassins'
-                ? new window.google.maps.Size(40, 40)
-                : new window.google.maps.Size(40, 40),
+            scaledSize: new window.google.maps.Size(40, 40),
           }}
         />
       )}
 
       {/* User placed Marker */}
-      {userChosenLocation && <Marker position={userChosenLocation} />}
+      {userChosenLocation && (
+        <Marker
+          position={userChosenLocation}
+          icon={{
+            url: '/icons/fighting.png',
+            scaledSize: new window.google.maps.Size(40, 40),
+          }}
+        />
+      )}
     </GoogleMap>
   ) : (
     <h1>Loading..</h1>

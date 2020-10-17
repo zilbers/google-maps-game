@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './context/UserContext';
+import GameContextProvider from './context/GameContext';
 import WrappedMap from './pages/Map';
 import SideMenu from './components/SideMenu';
 import Login from './components/Login';
@@ -16,15 +17,17 @@ function App() {
   return (
     <div className='App'>
       {!context.faction && <Login onClick={context.chooseFaction} />}
-      {context.faction && <SideMenu />}
-      <div className={`Map ${interactionsStatus}`}>
-        <WrappedMap
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_API_KEY}`}
-        />
-      </div>
+      <GameContextProvider>
+        {context.faction && <SideMenu />}
+        <div className={`Map ${interactionsStatus}`}>
+          <WrappedMap
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `100%` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_API_KEY}`}
+          />
+        </div>
+      </GameContextProvider>
     </div>
   );
 }
