@@ -29,6 +29,7 @@ function Map() {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [userChosenLocation, setUserChosenLocation] = useState(null);
   const [action, setAction] = useState(null);
+  const [formValues, setFormValues] = useState(null);
 
   function getCurrentLocation(position) {
     setCurrentLocation({
@@ -66,11 +67,21 @@ function Map() {
       lng: () => currentLocation.lng,
     });
     gameContext.setDistance(distance);
-    console.log(gameContext.distance);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    switch (formValues.action) {
+      case 0:
+        setCurrentLocation(userChosenLocation);
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+    }
+    setUserChosenLocation(null);
+    setAction(null);
   };
 
   useEffect(() => {
@@ -186,17 +197,32 @@ function Map() {
             <h4>Your distance is {gameContext.distance} meters</h4>
 
             <span>
-              <input type='radio' id='move' name='action'></input>
+              <input
+                type='radio'
+                id='move'
+                name='action'
+                onChange={() => setFormValues({ action: 0 })}
+              ></input>
               <label htmlFor='move'>Move here</label>
             </span>
 
             <span>
-              <input type='radio' id='attack' name='action'></input>
+              <input
+                type='radio'
+                id='attack'
+                name='action'
+                onChange={() => setFormValues({ action: 1 })}
+              ></input>
               <label htmlFor='attack'>Attack</label>
             </span>
 
             <span>
-              <input type='radio' id='defend' name='action'></input>
+              <input
+                type='radio'
+                id='defend'
+                name='action'
+                onChange={() => setFormValues({ action: 2 })}
+              ></input>
               <label htmlFor='defend'>Defend</label>
             </span>
 
