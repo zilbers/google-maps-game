@@ -23,14 +23,46 @@ function Map() {
 
   const [cities, setCities] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-  const [startLocation, setStartLocation] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [userChosenLocation, setUserChosenLocation] = useState(null);
 
   function getCurrentLocation(position) {
-    setStartLocation({
+    setCurrentLocation({
       lat: parseFloat(position.coords.latitude),
       lng: parseFloat(position.coords.longitude),
     });
   }
+
+  const rad = function (x) {
+    return (x * Math.PI) / 180;
+  };
+
+  const getDistance = function (p1, p2) {
+    const earthRadius = 6378137; // Earth’s mean radius in meter
+    const distanceLat = rad(p2.lat() - p1.lat());
+    const distanceLng = rad(p2.lng() - p1.lng());
+    const a =
+      Math.sin(distanceLat / 2) * Math.sin(distanceLat / 2) +
+      Math.cos(rad(p1.lat())) *
+        Math.cos(rad(p2.lat())) *
+        Math.sin(distanceLng / 2) *
+        Math.sin(distanceLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = earthRadius * c;
+    return Math.floor(distance); // returns the distance in meter
+  };
+
+  const handleClick = ({ latLng }) => {
+    setUserChosenLocation({
+      lat: latLng.lat(),
+      lng: latLng.lng(),
+    });
+    const distance = getDistance(latLng, {
+      lat: () => currentLocation.lat,
+      lng: () => currentLocation.lng,
+    });
+    alert(distance);
+  };
 
   useEffect(() => {
     (async () => {
@@ -41,7 +73,7 @@ function Map() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(getCurrentLocation);
         } else {
-          setStartLocation({ lat: 31.768318, lng: 35.213711 });
+          setCurrentLocation({ lat: 31.768318, lng: 35.213711 });
           alert('Geolocation is not supported by this browser.');
         }
       } catch (e) {
@@ -50,11 +82,12 @@ function Map() {
     })();
   }, []);
 
-  return cities && startLocation ? (
+  return cities && currentLocation ? (
     <GoogleMap
       defaultZoom={10}
-      defaultCenter={startLocation}
+      defaultCenter={currentLocation}
       defaultOptions={{ ...options, styles: mapStyles }}
+      onClick={handleClick}
     >
       {cities.map((city, index) => {
         const faction = Math.random() > 0.5;
@@ -112,7 +145,7 @@ function Map() {
       {/* Users Marker */}
       {context.faction && (
         <Marker
-          position={startLocation}
+          position={currentLocation}
           icon={{
             url:
               context.faction === 'assassins'
@@ -125,6 +158,9 @@ function Map() {
           }}
         />
       )}
+
+      {/* User placed Marker */}
+      {userChosenLocation && <Marker position={userChosenLocation} />}
     </GoogleMap>
   ) : (
     <h1>Loading..</h1>

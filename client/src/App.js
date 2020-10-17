@@ -7,20 +7,17 @@ import './App.css';
 
 function App() {
   const context = useContext(UserContext);
-  const [
-    disableOrActiveInteractions,
-    setDisableOrActiveInteractions,
-  ] = useState('disabled');
+  const [interactionsStatus, setInteractionsStatus] = useState('disabled');
 
   useEffect(() => {
-    setDisableOrActiveInteractions(context.faction ? '' : 'disabled');
+    setInteractionsStatus(context.faction ? '' : 'disabled');
   }, [context]);
 
   return (
     <div className='App'>
       {!context.faction && <Login onClick={context.chooseFaction} />}
       {context.faction && <SideMenu />}
-      <div className={`Map ${disableOrActiveInteractions}`}>
+      <div className={`Map ${interactionsStatus}`}>
         <WrappedMap
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `100%` }} />}
