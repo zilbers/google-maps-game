@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import WrappedMap from './components/Map';
+import React, { useContext } from 'react';
+import { UserContext } from './context/UserContext';
+import WrappedMap from './pages/Map';
 import SideMenu from './components/SideMenu';
 import Login from './components/Login';
 import './App.css';
 
 function App() {
-  const [userFaction, setUserFaction] = useState(null);
+  const context = useContext(UserContext);
 
   return (
     <div className='App'>
-      {!userFaction && <Login onClick={setUserFaction} />}
+      {!context.faction && <Login onClick={context.chooseFaction} />}
       <SideMenu />
       <div className='Map'>
         <WrappedMap

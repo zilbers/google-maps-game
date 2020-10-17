@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './style/Login.css';
 
 function App({ onClick }) {
@@ -11,7 +11,7 @@ function App({ onClick }) {
             className='faction-icon-assassins'
             src='/assassins-creed-logo.svg'
           />
-          <span>Asassins</span>
+          <span>Assassins</span>
         </div>
 
         <div className='display-faction' onClick={() => onClick('tempalrs')}>
@@ -19,7 +19,7 @@ function App({ onClick }) {
             className='faction-icon-templars'
             src='/knights_templar_cross.svg'
           />
-          <span>Tempalrs</span>
+          <span>Templars</span>
         </div>
       </div>
     </div>
