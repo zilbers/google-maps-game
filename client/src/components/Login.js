@@ -9,7 +9,7 @@ function App({ onClick }) {
         <div className='display-faction' onClick={() => onClick('assassins')}>
           <img
             className='faction-icon-assassins'
-            src='/assassins-creed-logo.svg'
+            src='/icons/assassins-creed-logo.svg'
           />
           <span>Assassins</span>
         </div>
@@ -17,7 +17,7 @@ function App({ onClick }) {
         <div className='display-faction' onClick={() => onClick('tempalrs')}>
           <img
             className='faction-icon-templars'
-            src='/knights_templar_cross.svg'
+            src='/icons/knights_templar_cross.svg'
           />
           <span>Templars</span>
         </div>

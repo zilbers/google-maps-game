@@ -72,8 +72,8 @@ function Map() {
               }}
               icon={{
                 url: faction
-                  ? '/assassins-creed-logo.svg'
-                  : '/knights_templar_cross.svg',
+                  ? '/icons/assassins-creed-logo.svg'
+                  : '/icons/knights_templar_cross.svg',
                 scaledSize: faction
                   ? new window.google.maps.Size(40, 40)
                   : new window.google.maps.Size(30, 30),
@@ -108,18 +108,20 @@ function Map() {
           />
         </InfoWindow>
       )}
+
+      {/* Users Marker */}
       {context.faction && (
         <Marker
           position={startLocation}
           icon={{
             url:
               context.faction === 'assassins'
-                ? '/assassins-creed-logo.svg'
-                : '/knights_templar_cross.svg',
+                ? '/icons/assassin.png'
+                : '/icons/knight.png',
             scaledSize:
               context.faction === 'assassins'
                 ? new window.google.maps.Size(40, 40)
-                : new window.google.maps.Size(30, 30),
+                : new window.google.maps.Size(40, 40),
           }}
         />
       )}
