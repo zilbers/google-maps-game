@@ -72,12 +72,12 @@ function Map() {
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (formValues.action) {
-      case 0:
+      case 'move':
         setCurrentLocation(userChosenLocation);
         break;
-      case 1:
+      case 'attack':
         break;
-      case 2:
+      case 'defend':
         break;
     }
     setUserChosenLocation(null);
@@ -201,7 +201,7 @@ function Map() {
                 type='radio'
                 id='move'
                 name='action'
-                onChange={() => setFormValues({ action: 0 })}
+                onChange={() => setFormValues({ action: 'move' })}
               ></input>
               <label htmlFor='move'>Move here</label>
             </span>
@@ -211,7 +211,7 @@ function Map() {
                 type='radio'
                 id='attack'
                 name='action'
-                onChange={() => setFormValues({ action: 1 })}
+                onChange={() => setFormValues({ action: 'attack' })}
               ></input>
               <label htmlFor='attack'>Attack</label>
             </span>
@@ -221,7 +221,7 @@ function Map() {
                 type='radio'
                 id='defend'
                 name='action'
-                onChange={() => setFormValues({ action: 2 })}
+                onChange={() => setFormValues({ action: 'defend' })}
               ></input>
               <label htmlFor='defend'>Defend</label>
             </span>
