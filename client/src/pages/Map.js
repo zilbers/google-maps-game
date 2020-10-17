@@ -79,13 +79,14 @@ function Map() {
         break;
       case 'defend':
         break;
+      default:
+        console.log('Nothing happens');
     }
     setUserChosenLocation(null);
     setAction(null);
   };
 
   useEffect(() => {
-    console.log(gameContext, userContext);
     (async () => {
       try {
         const { data: currentCities } = await axios.get('/api/v1/cities');
